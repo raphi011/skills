@@ -1,0 +1,11 @@
+{
+  "name": "my-skills",
+  "owner": {
+    "name": "Raphael Gruber"
+  },
+  "metadata": {
+    "description": "Personal skills marketplace",
+    "version": "1.0.0"
+  },
+  "plugins": []
+}
