@@ -7,5 +7,12 @@
     "description": "Personal skills marketplace",
     "version": "1.0.0"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "personal-skills",
+      "description": "Personal custom skills",
+      "source": "./",
+      "skills": ["./skills/surrealdb"]
+    }
+  ]
 }
