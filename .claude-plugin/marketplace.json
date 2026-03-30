@@ -12,7 +12,7 @@
       "name": "personal-skills",
       "description": "Personal custom skills",
       "source": "./personal-skills",
-      "skills": ["./skills/surrealdb", "./skills/charmbracelet-tui", "./skills/github-code-search", "./skills/codecov", "./skills/knowhow", "./skills/tailwind-css", "./skills/go-quality"]
+      "skills": ["./skills/surrealdb", "./skills/charmbracelet-tui", "./skills/github-code-search", "./skills/codecov", "./skills/knowhow", "./skills/tailwind-css", "./skills/go-quality", "./skills/pr-review-guide"]
     }
   ]
 }
