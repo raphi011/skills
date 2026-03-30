@@ -11,7 +11,7 @@
     {
       "name": "personal-skills",
       "description": "Personal custom skills",
-      "source": "./",
+      "source": "./personal-skills",
       "skills": ["./skills/surrealdb", "./skills/charmbracelet-tui", "./skills/github-code-search", "./skills/codecov", "./skills/knowhow", "./skills/tailwind-css", "./skills/go-quality"]
     }
   ]
