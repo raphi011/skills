@@ -13,6 +13,8 @@ metadata:
 
 # Mermaid Diagram Generator
 
+> **ALWAYS use `<br/>` for line breaks in node labels — NEVER `\n`.** `\n` renders as the literal characters `\n` in every diagram type. This applies to flowchart nodes, sequence diagram notes, and all other shapes.
+
 Generate Mermaid diagram code from user requirements. **Always read the reference doc** for the chosen diagram type before generating — don't rely on memory.
 
 ## Diagram Type Selection
@@ -79,6 +81,34 @@ A -->|yes (confirmed)| B        %% ❌ breaks on parens
 ### Flowchart node IDs starting with "o" or "x"
 
 `A---oB` creates a circle edge, `A---xB` a cross edge. Add a space or capitalize: `A--- oB` or `A---OB`.
+
+### Subgraph `direction` + cross-subgraph arrows = overlap
+
+Mixing `direction TB/LR` inside subgraphs with cross-subgraph arrows causes subgraph boxes to overlap. Use a plain `graph TD` or `graph LR` without inner `direction` directives when arrows cross subgraph boundaries:
+
+```
+%% ❌ causes overlap
+flowchart LR
+    subgraph A
+        direction TB
+        X --> Y
+    end
+    subgraph B
+        direction TB
+        P --> Q
+    end
+    Y --> P   %% cross-subgraph arrow breaks layout
+
+%% ✅ use graph TD without inner direction
+graph TD
+    subgraph A
+        X --> Y
+    end
+    subgraph B
+        P --> Q
+    end
+    Y --> P
+```
 
 ## Output Rules
 
