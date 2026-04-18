@@ -4,30 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A personal Claude Code **skills marketplace** using the "skills-only" pattern (Pattern 2). Skills are auto-activating knowledge resources that surface context when Claude detects relevant topics.
+A personal skills collection managed with [skillshare](https://skillshare.runkids.cc/). Skills are auto-activating knowledge resources that surface context when Claude detects relevant topics.
 
 ## Repository Structure
 
 ```
-.claude-plugin/marketplace.json   # Marketplace manifest — defines plugin bundles + skill paths
-skills/<skill-name>/SKILL.md      # Skill definition (YAML frontmatter + markdown body)
-skills/<skill-name>/references/   # Optional deep-reference docs loaded on demand
-docs/                             # Architecture docs (plugin-marketplaces.md)
+skills/<skill-name>/SKILL.md        # Skill definition (YAML frontmatter + markdown body)
+skills/<skill-name>/references/     # Optional deep-reference docs loaded on demand
+skills/<skill-name>/scripts/        # Optional executable scripts
+extras/rules/                       # Shareable rules (synced via skillshare extras)
 ```
 
 ## How Skills Work
 
-- **SKILL.md** has YAML frontmatter (`name`, `description`, `version`) + markdown content
+- **SKILL.md** has YAML frontmatter (`name`, `description`, `version`, `tags`, `targets`) + markdown content
 - `description` controls auto-activation — Claude reads it to decide when to trigger
 - Content should use **progressive disclosure**: critical gotchas inline in SKILL.md, detailed reference in `references/`
-- Skills are grouped into plugin bundles in `marketplace.json` via the `skills` array
+- `allowed-tools` and `argument-hint` are Claude-specific extensions preserved by skillshare
+- Skillshare discovers skills by walking for `SKILL.md` files — no manifest needed
 
 ## Adding a New Skill
 
 1. Create `skills/<skill-name>/SKILL.md` with frontmatter
 2. Optionally add `skills/<skill-name>/references/` for deep docs
-3. Add the skill path to the `skills` array in `.claude-plugin/marketplace.json`
-4. Install: `claude plugin install personal-skills@my-skills`
+3. Run `skillshare sync` to propagate
+
+## Installing This Collection
+
+```bash
+# Browse and select skills interactively
+skillshare install raphi011/skills
+
+# Install specific skills
+skillshare install raphi011/skills -s go-quality,codecov
+
+# Install all
+skillshare install raphi011/skills --all
+```
 
 ## Key Conventions
 
@@ -35,8 +48,5 @@ docs/                             # Architecture docs (plugin-marketplaces.md)
 - Skill file must be `SKILL.md` (not README.md)
 - SKILL.md should stay under ~250 lines — move detailed content to `references/`
 - The `description` field is the most important part of frontmatter — it determines when the skill auto-activates. Be specific about trigger keywords and use cases
-- Marketplace name is `my-skills`, plugin bundle is `personal-skills`
-
-## Marketplace Manifest Schema
-
-See `docs/plugin-marketplaces.md` for the full marketplace/plugin architecture, including external source formats, plugin anatomy (commands, agents, hooks, MCP), and registration details.
+- All skills target Claude Code (`targets: [claude]`)
+- `.skillignore` excludes non-skill directories (`extras/`, `.claude/`) from discovery
