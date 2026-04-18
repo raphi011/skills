@@ -6,6 +6,8 @@ description: >-
   "screenshot the terminal", "check what the TUI looks like", or "visually verify".
   Requires Kitty terminal with allow_remote_control and macOS for screencapture.
 version: 1.0.0
+tags: [tui, debugging, kitty]
+targets: [claude]
 allowed-tools: Bash(*/tui-debug.sh*), Bash(just:*), Bash(curl:*), Bash(sleep:*), Read, Glob, Grep
 ---
 
